@@ -6,16 +6,17 @@ import randPaths
 import genes
 from mpi4py import MPI
 
+
+# Initial conditions
 ITERATION = 5
 CHILDREN = 20
 MUT = 25
 GRAPH = [[]]
 NODES = 0
-startNode = 0
-endNode = 22
 
-startNode = int(startNode)
-endNode = int(endNode)
+
+startNode = 14
+endNode = 62
 
 comm = MPI.COMM_WORLD
 size = comm.Get_size()
@@ -37,11 +38,8 @@ with open('connectedGraph.csv', "rt") as f:
             GRAPH[NODES].remove(NODES)
         NODES += 1
         GRAPH.append([NODES])
+
 GRAPH.pop()
-
-
-
-
 paths = randPaths.randPaths(GRAPH, NODES, startNode, endNode)
 firstParent = paths.makeRoute()
 secondParent = paths.makeRoute()
